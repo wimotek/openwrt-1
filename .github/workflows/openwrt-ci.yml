@@ -155,8 +155,8 @@ jobs:
           
           #TOOLS
           cat >> .config <<EOF
-          #CONFIG_PACKAGE_tcpdump=y
-          #CONFIG_PACKAGE_luci-app-hd-idle=y
+          CONFIG_PACKAGE_tcpdump=y
+          CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           #CONFIG_PACKAGE_luci-app-autoreboot=y
           EOF
@@ -231,7 +231,7 @@ jobs:
         if: github.event == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.YOURTOKEN }}
+          repo_token: ${{ secrets_YOURTOKEN }}
           file: ./artifact/firmware/*
           tag: ${{ github.ref }}
           file_glob: true
