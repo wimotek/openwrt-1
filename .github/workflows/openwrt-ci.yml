@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: lede-17.01
 
       - name: Space cleanup
         env:
