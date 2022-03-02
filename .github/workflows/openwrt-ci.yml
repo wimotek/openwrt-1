@@ -124,7 +124,6 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-zerotier=y
           CONFIG_PACKAGE_iperf3=y
-          CONFIG_PACKAGE_luci-app-mwan3=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
           CONFIG_PACKAGE_luci-app-nlbwmon=y
           CONFIG_PACKAGE_luci-app-accesscontrol=y
@@ -169,7 +168,11 @@ jobs:
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-upnp=y
-          CONFIG_PACKAGE_luci-app-arpbind=y     
+          CONFIG_PACKAGE_luci-app-arpbind=y
+          #CONFIG_PACKAGE_luci-app-docker=y
+          CONFIG_PACKAGE_luci-app-sqm=y
+          CONFIG_PACKAGE_luci-app-mwan3=y
+          CONFIG_PACKAGE_luci-app-mwan3helper=y
           EOF
 
           #
