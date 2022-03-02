@@ -81,7 +81,7 @@ jobs:
           #cat >> .config <<EOF
           #CONFIG_TARGET_KERNEL_PARTSIZE=30
           #CONFIG_TARGET_ROOTFS_PARTSIZE=400
-          EOF
+          #EOF
           
           #型号CPU
           cat >> .config <<EOF
