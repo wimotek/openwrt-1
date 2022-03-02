@@ -12,7 +12,7 @@ name: OpenWrt-CI
 on:
   push:
     branches: 
-      - master
+      - lede-17.01
   # schedule:
   #   - cron: 0 20 * * *
   release:
