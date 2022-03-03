@@ -82,7 +82,7 @@ jobs:
           CONFIG_KERNEL_BUILD_DOMAIN="https://github.com/wimotek/lede/"
           #### 设置固件大小:
           CONFIG_TARGET_KERNEL_PARTSIZE=5
-          CONFIG_TARGET_ROOTFS_PARTSIZE=27
+          CONFIG_TARGET_ROOTFS_PARTSIZE=28
           #### 型号CPU
           CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7621=y
