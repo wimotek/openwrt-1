@@ -82,8 +82,8 @@ jobs:
           CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
           CONFIG_KERNEL_BUILD_DOMAIN="Azure"
           # 设置固件大小:
-          #CONFIG_TARGET_KERNEL_PARTSIZE=5
-          #CONFIG_TARGET_ROOTFS_PARTSIZE=27
+          CONFIG_TARGET_KERNEL_PARTSIZE=5
+          CONFIG_TARGET_ROOTFS_PARTSIZE=22
           #型号CPU
           CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7621=y
