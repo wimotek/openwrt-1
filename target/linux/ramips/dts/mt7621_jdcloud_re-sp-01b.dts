@@ -77,7 +77,7 @@
 			};
 
 			config: partition@30000 {
-				label = "config";
+				label = "u-boot-env";
 				reg = <0x30000 0x10000>;
 				read-only;
 			};
@@ -93,18 +93,6 @@
 				label = "firmware";
 				reg = <0x50000 0x1fb0000>;
 			};
-
-			#partition@1b00000 {
-			#	label = "mini";
-			#	reg = <0x1b00000 0x400000>;
-			#	read-only;
-			#};
-
-			#partition@1f00000 {
-			#	label = "oem";
-			#	reg = <0x1f00000 0x100000>;
-			#	read-only;
-			#};
 		};
 	};
 };
