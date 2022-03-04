@@ -63,7 +63,6 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone https://github.com/destan19/OpenAppFilter.git
-          git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git
 
       - name: Update feeds
         run: |
@@ -93,8 +92,8 @@ jobs:
           CONFIG_PACKAGE_kmod-mt7615d=y
           CONFIG_PACKAGE_kmod-mt7615d_dbdc=y   
           #### IPV6
-          CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-          CONFIG_PACKAGE_ipv6helper=y
+          #CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          #CONFIG_PACKAGE_ipv6helper=y
           #### USB支持
           CONFIG_PACKAGE_kmod-usb3=y   
           CONFIG_PACKAGE_kmod-usb-storage=y
@@ -104,37 +103,23 @@ jobs:
           CONFIG_PACKAGE_kmod-fs-exfat=y
           #### 网络共享
           CONFIG_PACKAGE_luci-app-samba4=y
-          CONFIG_PACKAGE_luci-app-vsftpd=y                                                    
           CONFIG_PACKAGE_luci-app-kodexplorer=y
           #### 网络工具
           CONFIG_PACKAGE_luci-app-zerotier=y
-          CONFIG_PACKAGE_luci-app-nlbwmon=y
-          CONFIG_PACKAGE_luci-app-accesscontrol=y
-          CONFIG_PACKAGE_luci-app-wol=y
-          CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-oaf=y
           #### HELLOWORLD
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           #### 去广告及其它增强插件
-          CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          CONFIG_PACKAGE_luci-app-unblockmusic=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=y
           #### 下载工具
           CONFIG_PACKAGE_luci-app-aria2=y   
           #### 主题
           CONFIG_PACKAGE_luci-theme-bootstrap=y
           #### TOOLS
-          CONFIG_PACKAGE_tcpdump=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-ttyd=y
-          CONFIG_PACKAGE_luci-app-autoreboot=y
           #### 所有程序
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_automount=y
-          CONFIG_PACKAGE_luci-app-vlmcsd=y
-          CONFIG_PACKAGE_luci-app-firewall=y
-          CONFIG_PACKAGE_luci-app-upnp=y
-          CONFIG_PACKAGE_luci-app-arpbind=y
           CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-mwan3=y
           CONFIG_PACKAGE_luci-app-mwan3helper=y
