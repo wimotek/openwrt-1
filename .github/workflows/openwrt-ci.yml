@@ -62,7 +62,8 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/wimotek/OpenAppFilter.git
+          git clone https://github.com/destan19/OpenAppFilter.git
+          https://github.com/jerrykuku/luci-app-jd-dailybonus.git
 
       - name: Update feeds
         run: |
@@ -108,12 +109,12 @@ jobs:
           #### 网络工具
           CONFIG_PACKAGE_luci-app-zerotier=y
           CONFIG_PACKAGE_iperf3=y
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
+          #CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
           CONFIG_PACKAGE_luci-app-nlbwmon=y
           CONFIG_PACKAGE_luci-app-accesscontrol=y
           CONFIG_PACKAGE_luci-app-wol=y
           CONFIG_PACKAGE_luci-app-ddns=y
-          CONFIG_PACKAGE_OpenAppFilter=y
+          CONFIG_PACKAGE_luci-app-oaf=y
           #### HELLOWORLD
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           #### 去广告及其它增强插件
