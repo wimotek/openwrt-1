@@ -57,7 +57,7 @@ $(call Package/iproute2/Default)
   TITLE:=Traffic control utility
   VARIANT:=tc
   PROVIDES:=tc
-  DEPENDS:=+kmod-sched-core +libxtables +libelf +(PACKAGE_devlink||PACKAGE_rdma):libmnl
+  DEPENDS:=+kmod-sched-core +libcap +libxtables +libelf +(PACKAGE_devlink||PACKAGE_rdma):libmnl
 endef
 
 define Package/genl
