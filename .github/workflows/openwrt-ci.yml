@@ -19,7 +19,6 @@ on:
     types: [published]
 
 jobs:
-
   build_openwrt:
 
     name: Build OpenWrt firmware
