@@ -184,7 +184,6 @@ jobs:
           path: ./bin/targets/
 
       - name: Upload release asset
-          if: github.event == 'release'
           uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.RELEASE_TOKEN }}
