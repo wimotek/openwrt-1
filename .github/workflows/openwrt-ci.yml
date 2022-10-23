@@ -10,9 +10,11 @@
 name: OpenWrt-CI
 
 on:
-  push:
-    branches: 
-      - lede-17.01
+  #push:
+  #  branches: 
+  #    - lede-17.01
+  repository_dispatch:
+  workflow_dispatch:
   schedule:
       - cron: 0 20 */3 * *
   #release:
