@@ -15,8 +15,8 @@ on:
       - lede-17.01
   schedule:
       - cron: 0 20 */3 * *
-  release:
-    types: [published]
+  #release:
+  #  types: [published]
 
 jobs:
   build_openwrt:
@@ -187,6 +187,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.RELEASE_TOKEN }}
+          release_name: date +"%Y%m%d%H%M"
           file: ./artifact/firmware/*
           tag: ${{ github.ref }}
           file_glob: true
