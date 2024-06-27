@@ -1,0 +1,14 @@
+diff --git a/blobmsg.c b/blobmsg.c
+index a860483..63fada8 100644
+--- a/blobmsg.c
++++ b/blobmsg.c
+@@ -195,7 +195,8 @@ blobmsg_new(struct blob_buf *buf, int type, const char *name, int payload_len, v
+ 	attr->id_len |= be32_to_cpu(BLOB_ATTR_EXTENDED);
+ 	hdr = blob_data(attr);
+ 	hdr->namelen = cpu_to_be16(namelen);
+-	strcpy((char *) hdr->name, (const char *)name);
++	hdr->name[strlen((char*)hdr->name)] = '\0';
++	strncpy((char *) hdr->name, (const char *)name, strlen((char*)hdr->name));
+ 	pad_end = *data = blobmsg_data(attr);
+ 	pad_start = (char *) &hdr->name[namelen];
+ 	if (pad_start < pad_end)
