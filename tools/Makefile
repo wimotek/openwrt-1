@@ -28,7 +28,6 @@ tools-y += firmware-utils patch-image quilt padjffs2
 tools-y += mm-macros missing-macros cmake bc findutils gengetopt patchelf
 tools-y += mtools dosfstools libressl
 tools-$(CONFIG_TARGET_orion_generic) += wrt350nv2-builder upslug2
-tools-y += ucl upx
 tools-$(CONFIG_TARGET_x86) += qemu
 tools-$(CONFIG_EFI_IMAGES) += gptfdisk popt
 tools-$(CONFIG_TARGET_mxs) += elftosb sdimage
@@ -43,7 +42,6 @@ tools-$(CONFIG_TARGET_apm821xx)$(CONFIG_TARGET_gemini) += genext2fs
 tools-$(CONFIG_TARGET_tegra) += cbootimage cbootimage-configs
 
 # builddir dependencies
-$(curdir)/upx/compile := $(curdir)/ucl/compile
 $(curdir)/bison/compile := $(curdir)/flex/compile
 $(curdir)/flex/compile := $(curdir)/libtool/compile
 $(curdir)/libtool/compile := $(curdir)/m4/compile $(curdir)/autoconf/compile $(curdir)/automake/compile $(curdir)/missing-macros/compile
