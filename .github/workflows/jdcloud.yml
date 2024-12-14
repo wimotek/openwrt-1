@@ -189,9 +189,10 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.RELEASE_TOKEN }}
-          release_name: date +"%Y%m%d%H%M"
           file: ./artifact/firmware/*
+          release_name: date +"%Y%m%d%H%M"
           tag: ${{ github.ref }}
+          overwrite: true
           file_glob: true
           
       - name: 清理旧的workflow
