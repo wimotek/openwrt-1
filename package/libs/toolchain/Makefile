@@ -134,6 +134,33 @@ define Package/libstdcpp/config
 	endmenu
 endef
 
+define Package/libasan
+$(call Package/gcc/Default)
+  NAME:=libasan
+  TITLE:=Runtime library for AddressSanitizer in GCC
+  DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips64 @!mips64el @!arc
+  ABI_VERSION:=5
+endef
+
+define Package/libasan/config
+	menu "Configuration"
+	depends on EXTERNAL_TOOLCHAIN && PACKAGE_libasan
+
+	config LIBASAN_ROOT_DIR
+		string
+		prompt "libasan shared library base directory"
+		depends on EXTERNAL_TOOLCHAIN && PACKAGE_libasan
+		default TOOLCHAIN_ROOT  if !NATIVE_TOOLCHAIN
+		default "/"  if NATIVE_TOOLCHAIN
+
+	config LIBASAN_FILE_SPEC
+		string
+		prompt "libasan shared library files (use wildcards)"
+		depends on EXTERNAL_TOOLCHAIN && PACKAGE_libasan
+		default "./lib/libasan.so.*"
+
+	endmenu
+endef
 
 define Package/libc/Default
   SECTION:=libs
@@ -409,6 +436,11 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(TOOLCHAIN_DIR)/lib/libstdc++.so.* $(1)/usr/lib/
   endef
+  
+  define Package/libasan/install
+	$(INSTALL_DIR) $(1)/lib
+	$(CP) $(TOOLCHAIN_DIR)/lib/libasan.so.* $(1)/lib/
+  endef
 
   define Package/glibc/install
 	$(CP) ./glibc-files/* $(1)/
@@ -620,6 +652,7 @@ $(eval $(call BuildPackage,libgcc))
 $(eval $(call BuildPackage,libatomic))
 $(eval $(call BuildPackage,libssp))
 $(eval $(call BuildPackage,libstdcpp))
+$(eval $(call BuildPackage,libasan))
 $(eval $(call BuildPackage,libpthread))
 $(eval $(call BuildPackage,libthread-db))
 $(eval $(call BuildPackage,librt))

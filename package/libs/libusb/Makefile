@@ -8,20 +8,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libusb
-PKG_VERSION:=1.0.22
-PKG_RELEASE:=1
+PKG_VERSION:=1.0.26
+PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=\
   https://github.com/libusb/libusb/releases/download/v$(PKG_VERSION) \
   @SF/$(PKG_NAME)
-PKG_HASH:=75aeb9d59a4fdb800d329a545c2e6799f732362193b465ea198f2aa275518157
+PKG_HASH:=12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+
+PKG_MAINTAINER:= Felix Fietkau <nbd@nbd.name>
+PKG_LICENSE:=LGPL-2.1-or-later
+PKG_LICENSE_FILES:=COPYING
+PKG_CPE_ID:=cpe:/a:libusb:libusb
 
 PKG_INSTALL:=1
-PKG_BUILD_PARALLEL:=0
-PKG_LICENSE:=LGPL-2.1
-
-PKG_MAINTAINER := Felix Fietkau <nbd@nbd.name>
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -29,8 +31,9 @@ define Package/libusb-1.0
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE:=A library for accessing Linux USB devices
-  DEPENDS:=+libpthread +librt
+  DEPENDS:=+libpthread +librt +libatomic
   URL:=http://libusb.info/
+  ABI_VERSION:=0
 endef
 
 define Package/libusb-1.0/description
@@ -38,18 +41,45 @@ define Package/libusb-1.0/description
   many different operating systems.
 endef
 
+define Package/fxload
+  SECTION:=utils
+  CATEGORY:=Utilities
+  TITLE:=fxload firmware loader
+  URL:=http://linux-hotplug.sourceforge.net
+  DEPENDS:=+libusb-1.0
+endef
+
+define Package/fxload/description
+This program is conveniently able to download firmware into FX, FX2,
+and FX2LP EZ-USB devices, as well as the original AnchorChips EZ-USB.
+It is intended to be invoked by hotplug scripts when the unprogrammed
+device appears on the bus.
+endef
+
 TARGET_CFLAGS += $(FPIC)
 CONFIGURE_ARGS += \
-	--disable-udev \
-	--disable-log
+	--enable-examples-build \
+	--disable-log \
+	--disable-udev
 
 define Build/InstallDev
-	$(CP) $(PKG_INSTALL_DIR)/* $(1)/
+	$(INSTALL_DIR) $(1)/usr/include/libusb-1.0
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/libusb-1.0/libusb.h $(1)/usr/include/libusb-1.0/
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libusb-1.0.* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libusb-1.0.pc $(1)/usr/lib/pkgconfig/
 endef
 
 define Package/libusb-1.0/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libusb*.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libusb-1.0.so* $(1)/usr/lib/
+endef
+
+define Package/fxload/install
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/examples/.libs/fxload $(1)/usr/sbin
 endef
 
 $(eval $(call BuildPackage,libusb-1.0))
+$(eval $(call BuildPackage,fxload))

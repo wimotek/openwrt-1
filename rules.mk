@@ -405,6 +405,34 @@ endef
 # file extension
 ext=$(word $(words $(subst ., ,$(1))),$(subst ., ,$(1)))
 
+# Count Git commits of a package
+# $(1) => if non-empty: count commits since last ": [uU]pdate to " or ": [bB]ump to " in commit message
+define commitcount
+$(shell \
+  if git log -1 >/dev/null 2>/dev/null; then \
+    if [ -n "$(1)" ]; then \
+      last_bump="$$(git log --pretty=format:'%h %s' . | \
+        grep -m 1 -e ': [uU]pdate to ' -e ': [bB]ump to ' | \
+        cut -f 1 -d ' ')"; \
+    fi; \
+    if [ -n "$$last_bump" ]; then \
+      echo -n $$(($$(git rev-list --count "$$last_bump..HEAD" .) + 1)); \
+    else \
+      git rev-list --count HEAD .; \
+    fi; \
+  else \
+    secs="$$(($(SOURCE_DATE_EPOCH) % 86400))"; \
+    date="$$(date --utc --date="@$(SOURCE_DATE_EPOCH)" "+%y%m%d")"; \
+    printf '%s.%05d' "$$date" "$$secs"; \
+  fi; \
+)
+endef
+
+abi_version_str = $(subst -,,$(subst _,,$(subst .,,$(1))))
+
+COMMITCOUNT = $(if $(DUMP),0,$(call commitcount))
+AUTORELEASE = $(if $(DUMP),0,$(call commitcount,1))
+
 all:
 FORCE: ;
 .PHONY: FORCE

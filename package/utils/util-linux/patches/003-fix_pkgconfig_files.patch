@@ -1,3 +1,4 @@
+
 --- a/libuuid/Makemodule.am
 +++ b/libuuid/Makemodule.am
 @@ -4,7 +4,6 @@ include libuuid/man/Makemodule.am

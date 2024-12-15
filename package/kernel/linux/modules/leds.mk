@@ -145,3 +145,51 @@ define KernelPackage/leds-pca963x/description
 endef
 
 $(eval $(call KernelPackage,leds-pca963x))
+
+define KernelPackage/leds-pwm
+  SUBMENU:=$(LEDS_MENU)
+  TITLE:=PWM driven LED Support
+  KCONFIG:=CONFIG_LEDS_PWM
+  DEPENDS:= @PWM_SUPPORT
+  FILES:=$(LINUX_DIR)/drivers/leds/leds-pwm.ko
+  AUTOLOAD:=$(call AutoLoad,60,leds-pwm,1)
+endef
+
+define KernelPackage/leds-pwm/description
+ This option enables support for pwm driven LEDs
+endef
+
+$(eval $(call KernelPackage,leds-pwm))
+
+
+define KernelPackage/leds-tlc591xx
+  SUBMENU:=$(LEDS_MENU)
+  TITLE:=LED driver for TLC59108 and TLC59116 controllers
+  DEPENDS:=+kmod-i2c-core +kmod-regmap-i2c
+  KCONFIG:=CONFIG_LEDS_TLC591XX
+  FILES:=$(LINUX_DIR)/drivers/leds/leds-tlc591xx.ko
+  AUTOLOAD:=$(call AutoLoad,60,leds-tlc591xx,1)
+endef
+
+define KernelPackage/leds-tlc591xx/description
+ This option enables support for Texas Instruments TLC59108
+ and TLC59116 LED controllers.
+endef
+
+$(eval $(call KernelPackage,leds-tlc591xx))
+
+
+define KernelPackage/leds-uleds
+  SUBMENU:=$(LEDS_MENU)
+  TITLE:=Userspace LEDs
+  KCONFIG:=CONFIG_LEDS_USER
+  FILES:=$(LINUX_DIR)/drivers/leds/uleds.ko
+  AUTOLOAD:=$(call AutoLoad,60,uleds,1)
+endef
+
+define KernelPackage/leds-uleds/description
+ This option enables support for userspace LEDs.
+endef
+
+$(eval $(call KernelPackage,leds-uleds))
+
